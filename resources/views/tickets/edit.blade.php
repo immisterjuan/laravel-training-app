@@ -1,13 +1,11 @@
 @extends('layouts.app')
-@section('title','New Ticket')
-@section('head')
-<style></style>
-@endsection
+@section('title','Edit Ticket')
 @section('content')
     @include('tickets.parts.toolbar')
     <div class="bg-white shadow-sm rounded-md overflow-x-auto p-10">
-        <form method="post" action="{{ route('tickets.store') }}">
+        <form method="post" action="{{ route('tickets.update', [$ticket->id]) }}">
             @csrf
+            @method('PUT')
             <div class="mb-3">
                 <label for="ticket-type" class="mr-6 text-sm">Type</label>
                 <select
@@ -15,9 +13,7 @@
                     id="ticket-type"
                     class="border border-gray-300 rounded min-w-50 p-1"
                     required
-                    {{ isset($ticket) ? 'disabled' : ''  }}
                 >
-
                     <option value="" default></option>
                     <option value="it"{{ isset($ticket) && $ticket->ticket_type === 'it' ? ' selected' : ''}}>IT</option>
                     <option value="accounting"{{ isset($ticket) && $ticket->ticket_type === 'accounting' ? ' selected' : ''}}>Accounting</option>
@@ -31,7 +27,6 @@
                     id="ticket-desc"
                     class="border border-gray-300 rounded min-h-50 w-full p-1"
                     required
-                    {{ isset($ticket) ? 'disabled' : ''  }}
                 >{{ $ticket->ticket_desc ?? ''  }}</textarea>
             </div>
             <div class="mb-3">
@@ -40,9 +35,7 @@
                     name="status"
                     id="ticket-status"
                     class="border border-gray-300 rounded min-w-50 p-1"
-                    {{ isset($ticket) ? 'disabled' : ''  }}
                 >
-
                     <option value="draft" default{{ isset($ticket) && $ticket->status === 'draft' ? ' selected' : ''}}>Draft</option>
                     <option value="open"{{ isset($ticket) && $ticket->status === 'open' ? ' selected' : ''}}>Open</option>
                     <option value="pending"{{ isset($ticket) && $ticket->status === 'pending' ? ' selected' : ''}}>Pending</option>
@@ -51,15 +44,13 @@
                     <option value="close"{{ isset($ticket) && $ticket->status === 'close' ? ' selected' : ''}}>Close</option>
                 </select>
             </div>
-            @if(!isset($ticket))
             <div class="mb-3">
                 <button
                     type="submit"
                     class="text-lg bg-blue-700 hover:bg-blue-800 text-white py-1 px-5 rounded w-full">
-                    Save
+                    Update
                 </button>
             </div>
-            @endif
         </form>
     </div>
 @endsection
