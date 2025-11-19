@@ -60,7 +60,12 @@ class TicketsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $ticket = Ticket::find($id);
+        $ticket->ticket_type = $request->input('ticket_type');
+        $ticket->ticket_desc = $request->input('ticket_desc');
+        $ticket->status = $request->input('status');
+        $ticket->save();
+        return redirect()->route('tickets.edit',[$id]);
     }
 
     /**
@@ -68,6 +73,8 @@ class TicketsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ticket = Ticket::find($id);
+        $ticket->delete();
+        return redirect()->route('tickets.index')->with('message','Record had been successfully deleted!');
     }
 }

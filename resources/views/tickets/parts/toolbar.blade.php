@@ -7,12 +7,4 @@
             Add Ticket
         </a>
     @endif
-    @if(!is_null($id) && request()->routeIs('tickets.show', $id))
-        <a href="{{ route('tickets.edit',[$id]) }}" class="inline-block px-3 py-2 rounded-md text-sm text-dark border border-gray-300 bg-transparent hover:bg-gray-300 focus:outline-none cursor-pointer">
-            Add Ticket
-        </a>
-    @endif
-
-
-
 </div>
