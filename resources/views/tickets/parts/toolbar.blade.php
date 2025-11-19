@@ -2,8 +2,17 @@
     <a href="{{ route('tickets.index') }}" class="inline-block px-3 py-2 rounded-md text-sm text-dark border border-gray-300 bg-transparent hover:bg-gray-300 focus:outline-none cursor-pointer">
         All Tickets
     </a>
-    <a href="{{ route('tickets.create') }}" class="inline-block px-3 py-2 rounded-md text-sm text-dark border border-gray-300 bg-transparent hover:bg-gray-300 focus:outline-none cursor-pointer">
-        Add Ticket
-    </a>
+    @if (request()->routeIs('tickets.index'))
+        <a href="{{ route('tickets.create') }}" class="inline-block px-3 py-2 rounded-md text-sm text-dark border border-gray-300 bg-transparent hover:bg-gray-300 focus:outline-none cursor-pointer">
+            Add Ticket
+        </a>
+    @endif
+    @if(!is_null($id) && request()->routeIs('tickets.show', $id))
+        <a href="{{ route('tickets.edit',[$id]) }}" class="inline-block px-3 py-2 rounded-md text-sm text-dark border border-gray-300 bg-transparent hover:bg-gray-300 focus:outline-none cursor-pointer">
+            Add Ticket
+        </a>
+    @endif
+
+
 
 </div>
