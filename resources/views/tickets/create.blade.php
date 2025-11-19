@@ -36,7 +36,7 @@
                 class="border border-gray-300 rounded min-h-50 w-full p-1"
                 required
                 {{ isset($ticket) ? 'disabled' : ''  }}
-            >{{ isset($ticket) ? $ticket->ticket_desc : ''  }}</textarea>
+            >{{ $ticket->ticket_desc ?? ''  }}</textarea>
         </div>
         <div class="mb-3">
             <label for="ticket-status" class="mr-6 text-sm">Status</label>
