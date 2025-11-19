@@ -21,7 +21,7 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        //
+        return view('tickets.create');
     }
 
     /**
@@ -29,7 +29,12 @@ class TicketsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ticket = new Ticket;
+        $ticket->ticket_type = $request->input('ticket_type');
+        $ticket->ticket_desc = $request->input('ticket_desc');
+        $ticket->status = $request->input('status');
+        $ticket->save();
+        return redirect()->route('tickets.show',[$ticket->id]);
     }
 
     /**
@@ -37,7 +42,8 @@ class TicketsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $ticket = Ticket::find($id);
+        return view('tickets.create', ['ticket' => $ticket]);
     }
 
     /**
